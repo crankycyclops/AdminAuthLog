@@ -1,6 +1,6 @@
-A Magento 2 module that logs admin authentication attempts to /path/to/store/var/log/crankycyclops/adminauthlog/auth.log.
+# A Magento 2 module that logs admin authentication attempts to /path/to/store/var/log/crankycyclops/adminauthlog/auth.log.
 
-Values that get logged include:
+## Values that get logged include:
 
 * username
 * status (whether or not the login attempt succeeded)
@@ -11,6 +11,8 @@ Values that get logged include:
 * user_agent
 * url (value of $_SERVER['REQUEST_URI'])
 * referrer (value of $_SERVER['HTTP_REFERER'])
+
+## Installing and Enabling AdminAuthLog
 
 ```
 mkdir -p /path/to/store/thirdparty/Crankycyclops
@@ -24,3 +26,22 @@ php bin/magento setup:upgrade
 Make sure to clear your cache, and also to run di:compile if you're in production mode.
 
 TODO: composer package coming soon!
+
+## Configuring Fail2ban
+
+### 1. Setup filter
+```
+ln -s /path/to/store/thirdparty/Crankycyclops/AdminAuthLog/fail2ban/filter.d/magento-adminauthlog.conf /etc/fail2ban/filter.d/magento-adminauthlog.conf
+```
+
+### 2. Add filter to jail.local
+
+Edit /etc/fail2ban/jail.local and append the following:
+
+```
+[magento-adminauthlog]
+
+enabled = true
+filter = magento-adminauthlog
+logpath = /path/to/store/var/log/crankycyclops/adminauthlog/auth.log
+```
