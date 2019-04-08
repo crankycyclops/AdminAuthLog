@@ -1,4 +1,4 @@
-# A Magento 2 module that logs admin authentication attempts to /path/to/store/var/log/crankycyclops/adminauthlog/auth.log.
+# Magento 2 module that logs admin authentication attempts
 
 ## Values that get logged include:
 
@@ -11,6 +11,8 @@
 * user_agent
 * url (value of $_SERVER['REQUEST_URI'])
 * referrer (value of $_SERVER['HTTP_REFERER'])
+
+Authentication attempts get logged to /path/to/store/var/log/crankycyclops/adminauthlog/auth.log.
 
 ## Installing and Enabling AdminAuthLog
 
